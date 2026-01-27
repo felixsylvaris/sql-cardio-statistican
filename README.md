@@ -3,12 +3,12 @@
 This project uses a cardiovascular disease dataset and demonstrates the use of statistical functions in PostgreSQL to explore risk factors and basic data analysis.
 
 ## Objectives
-1. Identify factors that increase the probability of cardiovascular disease.
+1. Identify demographic and clinical factors associated with cardiovascular disease.
 2. Showcase useful PostgreSQL functions for statistical analysis.
 
 ## Dataset
 - Original dataset: [Kaggle – Cardiovascular Disease Dataset](https://www.kaggle.com/datasets/akshatshaw7/cardiovascular-disease-dataset)
-- The repo includes a 1,000-row sample CSV for testing (`data/health_data_sample.csv`).  
+- The repo includes a 1,000-row sample CSV for testing (`data/health_data_sample.csv`).  Full dataset is 70k. We loose around 2k in cleaning outliers. 
 - To use the full dataset, download the CSV from Kaggle and place it in `data/health_data.csv`.
 *Version note:* We are using PostgreSQL (version 16 or higher) to ensure all statistical functions used in this project work correctly.
 
