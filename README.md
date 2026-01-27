@@ -18,13 +18,13 @@ This project uses a cardiovascular disease dataset and demonstrates the use of s
 |--------------|------------|
 | id           | Unique record identifier |
 | age          | Age in days (can convert to years) |
-| gender       | 1: female, 2: male |
+| gender       | 0: female, 1: male |
 | height       | Height in cm |
 | weight       | Weight in kg |
 | ap_hi        | Systolic blood pressure |
 | ap_lo        | Diastolic blood pressure |
-| cholesterol  | 1: normal, 2: above normal, 3: high |
-| gluc         | Glucose level (1: normal, 2: above normal, 3: high) |
+| cholesterol  | 0: normal, 1: above normal, 2: high |
+| gluc         | Glucose level (0: normal, 1: above normal, 2: high) |
 | smoke        | Smoker (TRUE/FALSE) |
 | alco         | Alcohol consumption (TRUE/FALSE) |
 | active       | Physical activity (TRUE/FALSE) |
@@ -115,7 +115,7 @@ Now we sellect rows where some values are outliners, possibly mistake in transcr
     ALTER TABLE cardiovas
     DROP COLUMN suspect;
     ```
-1st spot suspicious rows. Count how many of them. Delete them if count is low. Drop suspect column, as it served its purpose.
+1st spot suspicious rows. Count how many of them. We deleted rows with TRUE 'Suspect' since there was only 1.5k bad records, and we can work witouth them. We remove outlier since they could scew other metrics in later stages, and mistakes in data collection are possible.  Drop 'suspect' column, as it served its purpose.
 
 ### Creating new fields
 **Add age in years.** We create new fields which will be useful for future analysis.
