@@ -5,13 +5,6 @@ from cardiovas
 order by cardio desc
 ;
 
--- We describe disease existence by cholesterol level
-SELECT cholesterol, count(*),
-       ROUND(SUM(cardio::int)::numeric / COUNT(*) * 100, 2) AS disease_rate_percent
-FROM cardio.cardiovas
-GROUP BY cholesterol
-ORDER BY cholesterol;
-
 -- We compare correlation of different values. 0.2 weak, 0.5 strong
 SELECT
     CORR(cardio::int, age_years)    AS corr_age,
@@ -24,4 +17,14 @@ SELECT
     CORR(cardio::int, gluc)         AS corr_glucose,
      CORR(cardio::int, bmi)         AS corr_bmi
 FROM cardiovas;
+
+
+-- We describe disease existence by cholesterol level
+SELECT cholesterol, count(*),
+       ROUND(SUM(cardio::int)::numeric / COUNT(*) * 100, 2) AS disease_rate_percent
+FROM cardio.cardiovas
+GROUP BY cholesterol
+ORDER BY cholesterol;
+
+
 
