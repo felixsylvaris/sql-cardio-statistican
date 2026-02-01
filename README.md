@@ -52,6 +52,6 @@ Detailed cleaning steps are documented separately in cardioschema.sql and shema.
 - Systolic blood pressure showed a stronger association with cardiovascular disease than diastolic pressure in this dataset. Diastolic blood pressure was also positively correlated with disease presence, though with lower magnitude. This pattern is consistent with clinical literature, where systolic hypertension is often a stronger risk indicator in adult populations, while diastolic pressure still contributes to overall cardiovascular risk.
 - Single-predictor linear models further supported these findings. The relative explanatory strength of individual variables followed the order: systolic blood pressure (ap_hi) > diastolic blood pressure (ap_lo) > cholesterol > age > BMI > weight. Only systolic and diastolic blood pressure explained more than 10% of variance individually, reinforcing the dominant role of blood pressure–related measures. These results were consistent with correlation and stratified prevalence analyses.
 
-##Queries and Analysis
+## Queries and Analysis
 - SQL queries used for analysis are provided in cardioqueries.sql .
 - Additional explanations and selected outputs are documented in querries.md .
