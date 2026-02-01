@@ -1,8 +1,8 @@
 select count(*) from cardiovas;
 
-select cardio::int
+select sum(cardio::int)
 from cardiovas 
-order by cardio desc
+--order by cardio desc
 ;
 
 - We compare correlation of different values. 0.2 weak, 0.5 strong
@@ -15,10 +15,13 @@ SELECT
     CORR(cardio::int, bmi)          AS corr_bmi,
     CORR(cardio::int, cholesterol)  AS corr_cholesterol,
     CORR(cardio::int, gluc)         AS corr_glucose,
+     CORR(cardio::int, active)         AS corr_active,
     CORR(cardio::int, smoke)         AS corr_smoke,
     CORR(cardio::int, alco)         AS corr_alco,
     CORR(cardio::int, gender)         AS corr_gender
   FROM cardiovas;
+
+
 
 -- We describe disease existence by cholesterol level
 SELECT cholesterol, count(*),
@@ -54,7 +57,8 @@ ORDER BY gender;
     FROM cardiovas GROUP BY cardio::int
     ORDER BY cardio::int;
 
-
+select min(age_years), max(age_years)
+from cardiovas;
    -- Pairwise correlations (quick correlation matrix)
 
    -- CORR demonstrates linear association between cardio (0/1) and continuous predictors. 
@@ -84,6 +88,20 @@ ORDER BY gender;
     FROM cardiovas 
     GROUP BY sbp_stage 
     ORDER BY sbp_stage;
+    
+    -- Blood-pressure staging (diastolic) and disease rate
+-- Define simple diastolic BP stages and check disease prevalence per stage
+SELECT
+    CASE
+        WHEN ap_lo < 80 THEN 'normal'
+        WHEN ap_lo < 90 THEN 'stage_1'
+        ELSE 'stage_2_or_more'
+    END AS dbp_stage,
+    COUNT(*) AS n,
+    ROUND(SUM(cardio::int)::numeric / COUNT(*) * 100, 2) AS disease_pct
+FROM cardio.cardiovas
+GROUP BY dbp_stage
+ORDER BY dbp_stage;
     
     
     --Age decades: trend of disease prevalence by decade
@@ -194,7 +212,7 @@ GROUP BY GROUPING SETS (
     (cholesterol),
     ()
 )
-ORDER BY sex, cholesterol;
+ORDER BY disease_pct DESC;
 
 -- Compute regr_r2 of cardio::int on continuous predictors to rank predictors
 
@@ -230,7 +248,25 @@ FROM (
         'weight',
         regr_r2(cardio::int, weight)
     FROM cardiovas
+     UNION ALL
+    SELECT
+        'cholesterol',
+        regr_r2(cardio::int, cholesterol)
+    FROM cardiovas
 ) t
+
 ORDER BY r2 DESC NULLS LAST;
 
 
+
+'''
+- Correlation is generally on lower side, below 0.5 for all parameters. With height, glucose level, gender, and alcohol consumption being near 0. Even active lifestyle has no effect. Gender has no importance, so we dont have to count values separetly by gender in futher analys. 
+- Systolic and diastolic blood presure correlation is close to 0.4 which gives medium relation. However, this could be interpreted as post effect of existing heart disease not predestinating factor.
+- Age, BMI, and cholesterol has weak (around 0.2) but possitve correlation with heart disease.
+- In high cholesterol group 75% of respondens have heart disease.
+- The range of age is from 30 to 65 years which is subsection of adult life, USA avarage lifespan is 79 years. So our dataset is bias on age, which could make age influence look weaker.
+- Nevertheless responders in age range 30-40 had disease in 24% cases, with only small group of 1700 observations, while 60+ had disease in 66% cases.
+- There is noticable difference in hearth disease appearance among responders with BMI below 25 (normal) with 40% cases, and obsese above 30BMI, and disease presence above 60%.
+- Systolic blood pressure showed a stronger association with cardiovascular disease than diastolic pressure in this dataset. Diastolic blood pressure was also positively correlated with disease presence, though with a lower magnitude. This pattern is consistent with clinical literature, where systolic hypertension is often a stronger risk indicator, particularly in adult populations, while diastolic pressure still contributes to overall cardiovascular risk.
+- The single factor predictor in linear model has strenght order like: ap_hi > ap_lo > cholesterol>age > BMI>weight. Only Systonic and Distolic blood presure are predicting above 10%. But overall result are consistent with other statistics. 
+'''
