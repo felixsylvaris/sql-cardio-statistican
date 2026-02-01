@@ -1,6 +1,6 @@
-# Cardiovascular-Disease-Statistics-PostgreSQL
+# Cardiovascular Disease Analysis in PostgreSQL
 
-This project uses a cardiovascular disease dataset and demonstrates the use of statistical functions in PostgreSQL to explore risk factors and basic data analysis.
+This project analyzes a cardiovascular disease dataset and demonstrates the use of statistical and analytical functions available in PostgreSQL to explore factors associated with cardiovascular disease.
 
 ## Objectives
 1. Identify demographic and clinical factors associated with cardiovascular disease.
@@ -38,6 +38,8 @@ This project uses a cardiovascular disease dataset and demonstrates the use of s
 - Derived Body Mass Index (bmi) from height and weight
 - Rows removed represented a small fraction of the dataset and were excluded to prevent skewed statistical results
 
+Detailed cleaning steps are documented separately in cardioschema.sql and shema.md .
+
 ## Results
 - Overall correlations between individual variables and cardiovascular disease were generally modest, with all coefficients remaining below 0.5. Height, glucose level, gender, alcohol consumption, and physical activity showed correlations close to zero, indicating negligible linear association with disease presence. Gender in particular did not exhibit a meaningful relationship and was therefore not treated as a stratification factor in further analyses.
 - Both systolic and diastolic blood pressure showed moderate positive correlations with cardiovascular disease (approximately 0.4). While these associations are notable, they may partially reflect disease-related physiological changes rather than purely predisposing risk factors, given the cross-sectional nature of the dataset.
@@ -49,3 +51,6 @@ This project uses a cardiovascular disease dataset and demonstrates the use of s
 - Systolic blood pressure showed a stronger association with cardiovascular disease than diastolic pressure in this dataset. Diastolic blood pressure was also positively correlated with disease presence, though with lower magnitude. This pattern is consistent with clinical literature, where systolic hypertension is often a stronger risk indicator in adult populations, while diastolic pressure still contributes to overall cardiovascular risk.
 - Single-predictor linear models further supported these findings. The relative explanatory strength of individual variables followed the order: systolic blood pressure (ap_hi) > diastolic blood pressure (ap_lo) > cholesterol > age > BMI > weight. Only systolic and diastolic blood pressure explained more than 10% of variance individually, reinforcing the dominant role of blood pressure–related measures. These results were consistent with correlation and stratified prevalence analyses.
 
+##Queries and Analysis
+- SQL queries used for analysis are provided in cardioqueries.sql .
+- Additional explanations and selected outputs are documented in querries.md .
