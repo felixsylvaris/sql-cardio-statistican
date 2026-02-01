@@ -30,8 +30,8 @@ This project analyzes a cardiovascular disease dataset and demonstrates the use 
 | alco         | Alcohol consumption (TRUE/FALSE) |
 | active       | Physical activity (TRUE/FALSE) |
 | cardio       | Cardiovascular disease presence (TRUE/FALSE) |
-| age_years       | Age but in years which. Created.|
-| bmi       | Body Mass Index (BMI). Created. |
+| age_years       | Age converted to years (derived variable) |
+| bmi       | Body Mass Index (BMI). (derived variable) |
 
 ## Schema and data cleaning
 - Removed physiologically implausible outliers (height, weight, blood pressure)
@@ -39,7 +39,11 @@ This project analyzes a cardiovascular disease dataset and demonstrates the use 
 - Derived Body Mass Index (bmi) from height and weight
 - Rows removed represented a small fraction of the dataset and were excluded to prevent skewed statistical results
 
-Detailed cleaning steps are documented separately in cardioschema.sql and shema.md .
+Detailed cleaning steps are documented separately in schema.sql and schema.md .
+
+## Queries and Analysis
+- SQL queries used for analysis are provided in queries.sql .
+- Additional explanations and selected outputs are documented in queries.md .
 
 ## Results
 - Overall correlations between individual variables and cardiovascular disease were generally modest, with all coefficients remaining below 0.5. Height, glucose level, gender, alcohol consumption, and physical activity showed correlations close to zero, indicating negligible linear association with disease presence. Gender in particular did not exhibit a meaningful relationship and was therefore not treated as a stratification factor in further analyses.
@@ -50,8 +54,16 @@ Detailed cleaning steps are documented separately in cardioschema.sql and shema.
 - Despite this limitation, notable differences were observed across age groups: respondents aged 30–40 showed cardiovascular disease in approximately 24% of cases (based on a smaller sample of roughly 1,700 observations), while those aged 60 and above exhibited disease prevalence approaching 66%.
 - A clear gradient was also observed across BMI categories. Individuals with BMI below 25 (normal range) showed disease prevalence around 40%, whereas respondents with BMI above 30 (obese range) exhibited cardiovascular disease in more than 60% of cases.
 - Systolic blood pressure showed a stronger association with cardiovascular disease than diastolic pressure in this dataset. Diastolic blood pressure was also positively correlated with disease presence, though with lower magnitude. This pattern is consistent with clinical literature, where systolic hypertension is often a stronger risk indicator in adult populations, while diastolic pressure still contributes to overall cardiovascular risk.
-- Single-predictor linear models further supported these findings. The relative explanatory strength of individual variables followed the order: systolic blood pressure (ap_hi) > diastolic blood pressure (ap_lo) > cholesterol > age > BMI > weight. Only systolic and diastolic blood pressure explained more than 10% of variance individually, reinforcing the dominant role of blood pressure–related measures. These results were consistent with correlation and stratified prevalence analyses.
+- Single-predictor linear models further supported these findings. The relative explanatory strength of individual variables followed the order: systolic blood pressure (ap_hi) > diastolic blood pressure (ap_lo) > cholesterol > age > BMI > weight. Only systolic and diastolic blood pressure explained more than 10% of variance individually, reinforcing the dominant role of blood pressure–related measures.  These results were consistent with correlation and stratified prevalence analyses.
 
-## Queries and Analysis
-- SQL queries used for analysis are provided in cardioqueries.sql .
-- Additional explanations and selected outputs are documented in querries.md .
+### Limitation
+All analyses are exploratory and descriptive; observed associations do not imply causation. Especially high blood presure could be result of heart disease, so not a predictor, but diagnostic tool.
+Cohort selection was limited to people age 30-65. This bias could lower age correlation statistics. 
+We used simple linear models with a binary outcome as an exploratory approximation. 
+  
+## Key Findings (TL;DR)
+- Blood pressure (especially systolic) shows the strongest association with cardiovascular disease.
+- Age and BMI have weak but consistent positive associations.
+- Cholesterol categories show large differences in disease prevalence.
+- Lifestyle variables (smoking, alcohol, activity) show very weak associations in this dataset.
+
