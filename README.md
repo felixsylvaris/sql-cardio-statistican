@@ -8,9 +8,10 @@ This project analyzes a cardiovascular disease dataset and demonstrates the use 
 
 ## Dataset
 - Original dataset: [Kaggle – Cardiovascular Disease Dataset](https://www.kaggle.com/datasets/akshatshaw7/cardiovascular-disease-dataset)
-- The repo includes a 1,000-row sample CSV for testing (`data/health_data_sample.csv`).  Full dataset is 70k. We loose around 2k in cleaning outliers. 
+- The repository includes a 1,000-row sample CSV for testing(`data/health_data_sample.csv`).
+- The full dataset contains approximately 70,000 records. Around 2,000 rows were removed during data cleaning due to physiologically implausible values. 
 - To use the full dataset, download the CSV from Kaggle and place it in `data/health_data.csv`.
-*Version note:* We are using PostgreSQL (version 16 or higher) to ensure all statistical functions used in this project work correctly.
+*Version note:* PostgreSQL version 16 or higher is used to ensure compatibility with all statistical functions applied in this project.
 
 
 ## Fields Description
