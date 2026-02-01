@@ -516,26 +516,5 @@ Caveat:
 
 ---
 
-## Appendix: notes, caveats & small fixes
 
-- Schema consistency: some queries reference `cardiovasc` (no schema) and others `cardio.cardiovas` (schema-qualified). Use one consistent reference (or explicitly note both) to avoid confusion.
-- Duplicates & typos:
-  - Earlier versions had duplicate `corr_bmi` entries — the version in the repo shows a corrected correlation block but check for accidental duplicates.
-  - In the chi-square `exp` CTE the alias `t.total_noncases` appears; ensure the actual alias is `total_nocase` or adapt the name accordingly.
-- Defensive coding:
-  - Use `NULLIF(COUNT(*),0)` when dividing by counts that might be zero.
-  - Filter implausible values where appropriate (extreme BMI or BP) before computing summaries if you want robust estimates.
-- Interpretation:
-  - Correlation and univariate R² are screening tools, not causal evidence. Always follow up with stratified and adjusted analyses (or logistic regression) before claiming association.
-  - For small counts, prefer exact methods or report CIs derived via exact/robust approaches.
-- Reproducibility:
-  - Consider converting high-value queries (e.g., the ranking query, the two-way stratified table, or the odds-ratio block) into views or stored functions for reproducible reporting. I can generate those on request.
 
----
-
-If you want, I can:
-- Fix the minor typos and produce an updated `cardioqueries.sql`.
-- Produce a compact "daily deliverable" subset (3 queries) that follows your reduction philosophy.
-- Convert selected queries into parameterized SQL functions or views for the repo.
-
-True mastery is from reduction — this document keeps explanations focused and practical.
