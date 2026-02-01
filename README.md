@@ -57,7 +57,7 @@ Detailed cleaning steps are documented separately in schema.sql and schema.md .
 - Single-predictor linear models further supported these findings. The relative explanatory strength of individual variables followed the order: systolic blood pressure (ap_hi) > diastolic blood pressure (ap_lo) > cholesterol > age > BMI > weight. Only systolic and diastolic blood pressure explained more than 10% of variance individually, reinforcing the dominant role of blood pressure–related measures.  These results were consistent with correlation and stratified prevalence analyses.
 
 ### Limitation
-All analyses are exploratory and descriptive; observed associations do not imply causation. Especially high blood presure could be result of heart disease, so not a predictor, but diagnostic tool.
+All analyses are exploratory and descriptive; observed associations do not imply causation. Especially high blood pressure could be result of heart disease, so not a predictor, but diagnostic tool.
 Cohort selection was limited to people age 30-65. This bias could lower age correlation statistics. 
 We used simple linear models with a binary outcome as an exploratory approximation. 
   
